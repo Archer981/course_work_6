@@ -24,12 +24,16 @@ class User(AbstractBaseUser):
     image = models.ImageField(upload_to='user_image', null=True, blank=True)
     is_active = models.BooleanField(default=False)
 
-    def save(self, *args, **kwargs):
-        self.set_password(raw_password=self.password)
-        super().save(*args, **kwargs)
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+    # def save(self, *args, **kwargs):
+    #     self.set_password(raw_password=self.password)
+    #     super().save(*args, **kwargs)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
 
     @property
     def is_admin(self):
@@ -54,3 +58,7 @@ class User(AbstractBaseUser):
         return self.is_admin
 
     objects = UserManager()
+
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'

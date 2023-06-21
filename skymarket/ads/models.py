@@ -14,17 +14,17 @@ class Ad(models.Model):
     class Meta:
         verbose_name = 'Объявление'
         verbose_name_plural = 'Объявления'
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
 
 class Comment(models.Model):
     # TODO добавьте поля модели здесь
     text = models.TextField()
-    author = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    ad = models.ForeignKey('ads.Ad', on_delete=models.CASCADE)
+    author = models.ForeignKey('users.User', related_name='comments', on_delete=models.CASCADE)
+    ad = models.ForeignKey('ads.Ad', related_name='comments', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
-        ordering = ['created_at']
+        ordering = ['-created_at']

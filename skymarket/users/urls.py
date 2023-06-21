@@ -8,6 +8,6 @@ from rest_framework.routers import SimpleRouter
 user_router = SimpleRouter()
 user_router.register('users', UserViewSet, basename='users')
 
-urlpatterns = [
+users_urlpatterns = [
     path('', include(user_router.urls))
 ]
