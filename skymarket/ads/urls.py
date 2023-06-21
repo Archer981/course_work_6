@@ -10,6 +10,6 @@ comment_router = routers.SimpleRouter()
 comment_router.register('comments', CommentViewSet)
 
 ads_urlpatterns = [
-    path('', include(ad_router.urls)),
-    path('', include(comment_router.urls)),
+    path('api/', include(ad_router.urls)),
+    path('api/', include(comment_router.urls)),
 ]
